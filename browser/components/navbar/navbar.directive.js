@@ -10,7 +10,12 @@ app.directive('navbar', function ($state, $location, authFactory) {
 				var path = $location.path();
 				return path.startsWith(partial);
 			};
-			scope.logout = authFactory.logout;
+			scope.isLoggedIn = function () {
+				return Boolean(authFactory.getCurrentUser())
+			};
+			scope.logout = function () {
+				authFactory.logout();
+			}
 		}
 	}
 });

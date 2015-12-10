@@ -24,6 +24,16 @@ router.get('/', function (req, res, next) {
 	.then(null, next);
 });
 
+
+router.get('/me', function(req, res, next){
+	User.findById(req.session.userID)
+		.then(function (user) {
+			console.log('user: ', user)
+			res.json(user);
+		})
+		.then(null, next);
+})
+
 router.post('/', function (req, res, next) {
 	User.create(req.body)
 	.then(function (user) {
